@@ -5,6 +5,7 @@ import { bot } from "../bot.js";
 import fs from "fs";
 import path from "path";
 import { Api } from "telegram";
+import { UpdateConnectionState } from "telegram/network/index.js";
 
 export const eventTracker = async (
   session: string,
@@ -23,15 +24,20 @@ export const eventTracker = async (
   // client.addEventHandler((e) => handleRawUpdates(e, client), new Raw({}));
 
   client.addEventHandler(async (event: Api.TypeUpdate) => {
-    if (!(event instanceof Api.VirtualClass)) {
+    if (event instanceof UpdateConnectionState) {
       return;
     }
 
-    const message = `<pre><code class="language-json">${JSON.stringify(
-      event,
-      null,
-      2
-    )}</code></pre>`;
+    let eventJson;
+
+    try {
+      eventJson = JSON.stringify(event, null, 2);
+    } catch (err) {
+      console.error("Error JSON.stringify:", err);
+      console.log(event);
+    }
+
+    const message = `<pre><code class="language-json">${eventJson}</code></pre>`;
 
     if (event instanceof Api.UpdateNewMessage && "media" in event.message) {
       const bufferFile = await client.downloadMedia(event.message.media);
