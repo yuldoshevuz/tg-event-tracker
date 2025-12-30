@@ -23,6 +23,10 @@ export const eventTracker = async (
   // client.addEventHandler((e) => handleRawUpdates(e, client), new Raw({}));
 
   client.addEventHandler(async (event: Api.TypeUpdate) => {
+    if (!(event instanceof Api.VirtualClass)) {
+      return;
+    }
+
     const message = `<pre><code class="language-json">${JSON.stringify(
       event,
       null,
