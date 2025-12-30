@@ -9,9 +9,9 @@
   "scripts": {
     "build": "tsc && tsc-alias",
     "dev": "tsx --watch src/index.ts",
-    "start": "pm2 start ecosystem.config.json",
-    "stop": "pm2 stop ecosystem.config.json",
-    "restart": "pm2 restart ecosystem.config.json",
+    "start": "pm2 start ecosystem.config.json && pm2 logs",
+    "stop": "pm2 stop ecosystem.config.json && pm2 logs",
+    "restart": "pm2 restart ecosystem.config.json && pm2 logs",
     "logs": "pm2 logs --lines 1000"
   },
   "devDependencies": {
