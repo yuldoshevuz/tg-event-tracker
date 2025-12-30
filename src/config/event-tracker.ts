@@ -6,6 +6,7 @@ import fs from "fs";
 import path from "path";
 import { Api } from "telegram";
 import { UpdateConnectionState } from "telegram/network/index.js";
+import { UPLOADS_DIR } from "./constants.js";
 
 export const eventTracker = async (
   session: string,
@@ -60,10 +61,11 @@ export const eventTracker = async (
 
       const fileName = `event-data-${now}.json`;
 
-      const filePath = path.join("uploads", fileName);
+      const filePath = path.join(UPLOADS_DIR, fileName);
 
       try {
-        await fs.promises.writeFile(filePath, bufferMessage, "utf8");
+        await fs.promises.mkdir(UPLOADS_DIR, { recursive: true });
+        await fs.promises.writeFile(filePath, bufferMessage, "utf-8");
       } catch (error) {
         console.error("Failed to write file", error);
 
