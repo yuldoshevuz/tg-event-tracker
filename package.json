@@ -9,11 +9,15 @@
   "scripts": {
     "build": "tsc && tsc-alias",
     "dev": "tsx --watch src/index.ts",
-    "start": "node dist/index.js"
+    "start": "pm2 start ecosystem.config.json",
+    "stop": "pm2 stop ecosystem.config.json",
+    "restart": "pm2 restart ecosystem.config.json",
+    "logs": "pm2 logs --lines 1000"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
     "@types/node-telegram-bot-api": "^0.64.13",
+    "pm2": "^6.0.14",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",
     "tsx": "^4.21.0",
