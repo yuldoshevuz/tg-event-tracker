@@ -4,3 +4,9 @@ node_modules
 .vscode
 yarn.lock
 package-lock.json
+uploads/
+*.log
+*.tmp
+*.backup
+*.tar.gz
+.env.local
