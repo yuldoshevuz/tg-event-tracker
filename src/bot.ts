@@ -12,7 +12,7 @@ bot.on("message", async (msg) => {
   const textMsg = msg.text;
 
   if (textMsg && textMsg === "ping") {
-    await bot.sendMessage(chatId, "pong 🏓");
-    await bot.sendSticker(chatId, " 🚀 Event Tracker is running!");
+    await bot.sendMessage(chatId, "pong");
+    await bot.sendMessage(chatId, " 🚀 Event Tracker is running!");
   }
 });
